@@ -1,3 +1,7 @@
+future_tech_symblog:
+    resource: "@FutureTechSymblogBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

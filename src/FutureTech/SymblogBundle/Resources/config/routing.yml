@@ -1,0 +1,17 @@
+FutureTechSymblogBundle_homepage:
+    pattern:  /
+    defaults: { _controller: FutureTechSymblogBundle:Page:index }
+    requirements:
+        _method:  GET
+
+FutureTechSymblogBundle_about:
+    pattern:  /about
+    defaults: { _controller: FutureTechSymblogBundle:Page:about }
+    requirements:
+        _method:  GET
+
+FutureTechSymblogBundle_contact:
+    pattern:  /contact
+    defaults: { _controller: FutureTechSymblogBundle:Page:contact }
+    requirements:
+        _method:  GET
