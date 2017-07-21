@@ -17,7 +17,7 @@ class PageController extends Controller
     }
 
 	/**
-	 *	Handles request to about page
+	 *	Handles request to about page$loader->registerNamespaceFallbacks
 	 */
     public function aboutAction()
     {
@@ -34,14 +34,22 @@ class PageController extends Controller
 
 	    $request = $this->getRequest();
 	    if ($request->getMethod() == 'POST') {
-	        $form->bindRequest($request);
+	        $form->handleRequest($request);
 
 	        if ($form->isValid()) {
 	            // Perform some action, such as sending an email
+                $message = \Swift_Message::newInstance()
+                          ->setSubject('Contact enquiry from symblog')
+                          ->setFrom('enquiries@symblog.co.uk')
+                          ->setTo($this->container->getParameter('futuretech_symblog.emails.contact_email'))
+                          ->setBody($this->renderView('FutureTechSymblogBundle:Page:contactEmail.txt.twig', array('enquiry' => $enquiry)));
+                $this->get('mailer')->send($message);
 
-	            // Redirect - This is important to prevent users re-posting
-	            // the form if they refresh the page
-	            return $this->redirect($this->generateUrl('FutureTechSymblogBundle_contact'));
+                $this->get('session')->getFlashBag()->add('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
+
+                 // Redirect - This is important to prevent users re-posting
+                // the form if they refresh the page
+                return $this->redirect($this->generateUrl('FutureTechSymblogBundle_contact'));
 	        }
 	    }
 

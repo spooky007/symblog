@@ -14,4 +14,23 @@ FutureTechSymblogBundle_contact:
     pattern:  /contact
     defaults: { _controller: FutureTechSymblogBundle:Page:contact }
     requirements:
+        _method:  GET|POST
+
+FutureTechSymblogBundle_blog_show:
+    pattern:  /{id}
+    defaults: { _controller: FutureTechSymblogBundle:Blog:show }
+    requirements:
         _method:  GET
+        id: \d+
+
+FutureTechSymblogBundle_login:
+    pattern:  /login
+    defaults: { _controller: FutureTechSymblogBundle:Login:login }
+    requirements:
+        _method:  GET|POST
+
+FutureTechSymblogBundle_logout:
+    pattern:  /logout
+    defaults: { _controller: FutureTechSymblogBundle:Login:logout }
+    requirements:
+        _method:  GET|POST
